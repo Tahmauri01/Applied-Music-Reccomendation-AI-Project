@@ -1,0 +1,44 @@
+flowchart TD
+    subgraph Song_Class["Song"]
+        S1["id, title, artist"]
+        S2["genre, mood"]
+        S3["energy, tempo_bpm, valence"]
+        S4["danceability, acousticness"]
+    end
+
+    subgraph UserProfile_Class["UserProfile"]
+        U1["favorite_genre"]
+        U2["favorite_mood"]
+        U3["target_energy"]
+        U4["likes_acoustic"]
+    end
+
+    subgraph Recommender_Class["Recommender"]
+        R0["self.songs: List of Song"]
+        R1["__init__(songs)"]
+        R2["recommend(user, k)"]
+        R3["explain_recommendation(user, song)"]
+    end
+
+    R1 --> R0
+    R0 --> R2
+    UserProfile_Class --> R2
+
+    R2 --> Loop["for each Song in self.songs"]
+    Song_Class --> Loop
+    Loop --> Cmp["compare Song attrs vs UserProfile attrs"]
+
+    Cmp --> G["genre match: song.genre == user.favorite_genre"]
+    Cmp --> M["mood match: song.mood == user.favorite_mood"]
+    Cmp --> E["energy match: 1 - abs(song.energy - user.target_energy)"]
+    Cmp --> A["acoustic match: song.acousticness vs user.likes_acoustic"]
+
+    G --> Score["weighted score = w1*G + w2*M + w3*E + w4*A"]
+    M --> Score
+    E --> Score
+    A --> Score
+
+    Score --> Rank["rank all Songs by score, descending"]
+    Rank --> TopK["take top k Songs"]
+    TopK --> Return["return List of Song"]
+    TopK -.-> R3

@@ -29,6 +29,11 @@ Some prompts to answer:
 
 You can include a simple diagram or bullet list if helpful.
 
+In my system each song contains the name, artist, genre, mood, energy, tempo, valence, danceability, and acousticness. The UserProfile object stores the users favorite genre, mood, preferred energy, and whether they like acoustics or not. The system computes a score by using this formula: "score = w1*(genre match) + w2*(mood match) + w3*(1 - |energy - target_energy|) + w4*(acoustic match)", where genre, mood, target energy, and acoustic match are taken from the UserProfile object. For the weights, genre/w1=0.4, mood/w2=0.3, energy/w3=0.2, acousticness/w4=0.1. The songs are chosen to be recommended by ranking each song based on how high their score is(max score of 1). The Recommender object then shows and explains the recommendation and rankings.
+
+Bias - This system heavily favors genre and does not represent acoustics as much as others when some people would prefer acoustics over genre.
+
+
 ---
 
 ## Getting Started
