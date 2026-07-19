@@ -73,16 +73,52 @@ You can add more tests in `tests/test_recommender.py`.
 
 ## Sample Recommendation Output
 
-Paste a sample of your recommender's output here as a text block so a reader can see what it produces:
+==================================================
+User Profile
+==================================================
+Favorite Genre:  hip hop
+Favorite Mood:   happy
+Target Energy:   0.7
+Likes Acoustic:  True
 
-```
-# e.g.:
-# User profile: genre=indie, mood=chill, energy=low
-# Recommendations:
-#   1. ...
-#   2. ...
-#   3. ...
-```
+==================================================
+Top 5 Recommendations
+==================================================
+
+1. City Lights Anthem - Rhea Voss
+   Score: 0.57
+   Reasons:
+     - Matched genre taste
+     - Did not match mood taste
+     - Did not match acoustic taste
+
+2. Rooftop Lights - Indigo Parade
+   Score: 0.49
+   Reasons:
+     - Did not match genre taste
+     - Matched mood taste
+     - Did not match acoustic taste
+
+3. Sunrise City - Neon Echo
+   Score: 0.48
+   Reasons:
+     - Did not match genre taste
+     - Matched mood taste
+     - Did not match acoustic taste
+
+4. Dust Road Home - Callum Briar
+   Score: 0.26
+   Reasons:
+     - Did not match genre taste
+     - Did not match mood taste
+     - Matched acoustic taste
+
+5. Wildflower Trail - Given River
+   Score: 0.25
+   Reasons:
+     - Did not match genre taste
+     - Did not match mood taste
+     - Matched acoustic taste
 
 **Screenshot or video** *(optional)*: <!-- Insert a screenshot or demo video link here -->
 
