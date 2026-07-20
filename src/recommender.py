@@ -77,32 +77,44 @@ def score_song(user_prefs: Dict, song: Dict) -> Tuple[float, List[str]]:
     Scores a single song against user preferences.
     Required by recommend_songs() and src/main.py
     """
-    w1,w2,w3,w4 = .4,.3,.2,.1
+    w1,w2,w3,w4 = .325,.3,.25,.125
     reasons = []
 
-    if user_prefs['favorite_genre'] == song['genre']:
+    fav_genre = (user_prefs.get('favorite_genre')).lower()
+    fav_mood = (user_prefs.get('favorite_mood')).lower()
+
+    if fav_genre == song.get('genre'):
         genre_match = 1
         reasons.append("Matched genre taste")
     else:
         genre_match = 0
         reasons.append("Did not match genre taste")
-    if user_prefs['favorite_mood'] == song['mood']:
+
+    if fav_mood == song.get('mood'):
         mood_match = 1
         reasons.append("Matched mood taste")
     else:
         mood_match = 0
         reasons.append("Did not match mood taste")
-    if user_prefs['likes_acoustic'] == True and song['acousticness'] >= .5:
+
+    if user_prefs.get('target_energy') > 1:
+        target_energy = 1
+    else:
+        target_energy = abs(float(user_prefs.get('target_energy')))
+
+    if user_prefs.get('likes_acoustic') == True and song.get('acousticness') >= .5:
         acoustic_match = 1
         reasons.append("Matched acoustic taste")
-    elif user_prefs['likes_acoustic'] == False and song['acousticness'] < .5:
+    elif user_prefs.get('likes_acoustic') == False and song.get('acousticness') < .5:
         acoustic_match = 1
         reasons.append("Matched acoustic taste")
     else:
         acoustic_match = 0
         reasons.append("Did not match acoustic taste")
 
-    score = w1*(genre_match) + w2*(mood_match) + w3*(1 - abs(song['energy'] - user_prefs['target_energy'])) + w4*(acoustic_match)
+    
+
+    score = w1*(genre_match) + w2*(mood_match) + w3*(1 - abs(song['energy'] - target_energy)) + w4*(acoustic_match)
 
     
         
@@ -128,7 +140,7 @@ def recommend_songs(user_prefs: Dict, songs: List[Dict], k: int = 5) -> List[Tup
 
     # Expected return format: (song_dict, score, explanation)
     rec.sort(key=score_sort, reverse=True)
-    return rec[:k]
+    return rec[:abs(k)]
 
 def score_sort(x):
     """Returns the score element of a (song, score, explanation) tuple, for use as a sort key."""

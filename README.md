@@ -120,6 +120,86 @@ Top 5 Recommendations
      - Did not match mood taste
      - Matched acoustic taste
 
+
+Loading songs from data/songs.csv...
+Loaded Songs: 20
+
+==================================================
+User Profile
+==================================================
+Favorite Genre:  hip hop
+Favorite Mood:   happy
+Target Energy:   0.7
+Likes Acoustic:  True
+
+==================================================
+Top 1 Recommendations
+==================================================
+
+1. City Lights Anthem - Rhea Voss
+   Score: 0.43
+   Reasons:
+     - Matched genre taste
+     - Did not match mood taste
+     - Did not match acoustic taste
+
+==================================================
+User Profile
+==================================================
+Favorite Genre:  pop
+Favorite Mood:   chill
+Target Energy:   0.4
+Likes Acoustic:  False
+
+==================================================
+Top 1 Recommendations
+==================================================
+
+1. Sunrise City - Neon Echo
+   Score: 0.54
+   Reasons:
+     - Matched genre taste
+     - Did not match mood taste
+     - Matched acoustic taste
+
+==================================================
+User Profile
+==================================================
+Favorite Genre:  synthwave
+Favorite Mood:   romantic
+Target Energy:   0.2
+Likes Acoustic:  True
+
+==================================================
+Top 1 Recommendations
+==================================================
+
+1. Night Drive Loop - Neon Echo
+   Score: 0.45
+   Reasons:
+     - Matched genre taste
+     - Did not match mood taste
+     - Did not match acoustic taste
+
+==================================================
+User Profile
+==================================================
+Favorite Genre:  country
+Favorite Mood:   playful
+Target Energy:   0.9
+Likes Acoustic:  True
+
+==================================================
+Top 1 Recommendations
+==================================================
+
+1. Dust Road Home - Callum Briar
+   Score: 0.60
+   Reasons:
+     - Matched genre taste
+     - Did not match mood taste
+     - Matched acoustic taste
+
 **Screenshot or video** *(optional)*: <!-- Insert a screenshot or demo video link here -->
 
 ---
@@ -144,7 +224,7 @@ Examples:
 - It does not understand lyrics or language
 - It might over favor one genre or mood
 
-You will go deeper on this in your model card.
+System doesn't understand lyrics and also favors genre and mood over all other features.
 
 ---
 
@@ -158,6 +238,10 @@ Write 1 to 2 paragraphs here about what you learned:
 
 - about how recommenders turn data into predictions
 - about where bias or unfairness could show up in systems like this
+
+Recommender use a scoring system to turn data into predictions. The recommender would have a dataset to refer to. The user then inputs their preferences. The recommender compares the preferences to each song to see how well it matches. The songs features are compared to the user's preferences and it is scored based on the weight of each feature, decided by the recommender, added together. After the song is scored, the songs are ordered by score, highest to lowest, the higher the score means the recommender thinks the user will like it more.
+
+Bias/unfairness comes into systems like this because of the weight of each feature of a song judged. The weights are decided by the developer of the code, who may have genre has the most weighted feature, however, a user may prefer the acousticness over everything, which would make that recommender inaccurate to them.
 
 
 
