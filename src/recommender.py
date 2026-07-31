@@ -101,6 +101,10 @@ def score_song(user_prefs: Dict, song: Dict) -> Tuple[float, List[str]]:
         target_energy = 1
     else:
         target_energy = abs(float(user_prefs.get('target_energy')))
+    if abs(target_energy - song.get('energy')) <= .5:
+        reasons.append(f"Song energy off by {abs(target_energy - song.get('energy')):.2f}")
+    else:
+        reasons.append("Did not match target energy")    
 
     if user_prefs.get('likes_acoustic') == True and song.get('acousticness') >= .5:
         acoustic_match = 1

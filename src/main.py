@@ -10,6 +10,7 @@ You will implement the functions in recommender.py:
 """
 
 from recommender import load_songs, recommend_songs
+from llm_explainer import explanation_generator
 
 
 def main() -> None:
@@ -52,6 +53,7 @@ def main() -> None:
     # recommendations = recommend_songs(taste_profile_3, songs, k=5)
     # recommendations = recommend_songs(taste_profile_4, songs, k=5)
 
+
     print("\n" + "=" * 50)
     print("User Profile")
     print("=" * 50)
@@ -71,6 +73,10 @@ def main() -> None:
         print("   Reasons:")
         for reason in explanation.split(", "):
             print(f"     - {reason}")
+
+
+        ai_explanation = explanation_generator(taste_profile_1, song, score, explanation)
+        print(ai_explanation)
 
 
 if __name__ == "__main__":
