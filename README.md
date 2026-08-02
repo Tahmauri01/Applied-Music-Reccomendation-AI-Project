@@ -1,5 +1,7 @@
 # 🎵 Music Recommender AI
 
+https://github.com/Tahmauri01/Applied-Music-Reccomendation-AI-Project
+
 ## Project Summary
 
 This project takes user taste profile including their favorite genre, mood, energy, and acousticness of a song. With this data, they are recommended their top k songs from a database of 200 songs, each song having it's own score. The higher the score the higher the rank. This recommendation includes an AI summary of positive and negative factors that contributed to the songs score.
