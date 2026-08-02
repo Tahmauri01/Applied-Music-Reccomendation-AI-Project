@@ -20,6 +20,18 @@ flowchart TD
         R3["explain_recommendation(user, song)"]
     end
 
+    subgraph HumanTesting["main.py: human testing profiles"]
+        T1["taste_profile_1: hip hop, happy, energy 0.7, acoustic true"]
+        T2["taste_profile_2: pop, chill, energy 0.4, acoustic false"]
+        T3["taste_profile_3: synthwave, romantic, energy 0.2, acoustic true"]
+        T4["taste_profile_4: country, playful, energy 0.9, acoustic true"]
+    end
+
+    T1 --> UserProfile_Class
+    T2 --> UserProfile_Class
+    T3 --> UserProfile_Class
+    T4 --> UserProfile_Class
+
     R1 --> R0
     R0 --> R2
     UserProfile_Class --> R2
@@ -40,5 +52,28 @@ flowchart TD
 
     Score --> Rank["rank all Songs by score, descending"]
     Rank --> TopK["take top k Songs"]
-    TopK --> Return["return List of Song"]
+    TopK --> Return["return list of (song, score, reasons)"]
     TopK -.-> R3
+
+    subgraph KnowledgeBase["knowledge_base.py"]
+        KB1["GENRE_INFO: genre -> reference blurb"]
+        KB2["MOOD_INFO: mood -> reference blurb"]
+        KB3["retrieve_context(genre, mood)"]
+        KB1 --> KB3
+        KB2 --> KB3
+    end
+
+    subgraph LLMExplainer["llm_explainer.py"]
+        L1["explanation_generator(user_prefs, song, score, reasons)"]
+        L2["build prompt: score + reasons + retrieved genre/mood context"]
+        L3["client.messages.create(model, prompt)"]
+        L4["extract text from response.content"]
+        L1 --> L2
+        L2 --> L3
+        L3 --> L4
+    end
+
+    Return --> L1
+    L1 --> KB3
+    KB3 --> L2
+    L4 --> Output["final natural-language explanation, one per song"]
