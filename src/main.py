@@ -68,11 +68,11 @@ def main() -> None:
 
     for rank, rec in enumerate(recommendations, start=1):
         song, score, explanation = rec
-        print(f"\n{rank}. {song['title']} - {song['artist']}")
-        print(f"   Score: {score:.2f}")
-        print("   Reasons:")
-        for reason in explanation.split(", "):
-            print(f"     - {reason}")
+        # print(f"\n{rank}. {song['title']} - {song['artist']}")
+        # print(f"   Score: {score:.2f}")
+        # print("   Reasons:")
+        # for reason in explanation.split(", "):
+        #     print(f"     - {reason}")
 
 
         ai_explanation = explanation_generator(taste_profile_1, song, score, explanation)

@@ -114,7 +114,7 @@ def score_song(user_prefs: Dict, song: Dict) -> Tuple[float, List[str]]:
         reasons.append("Matched acoustic taste")
     else:
         acoustic_match = 0
-        reasons.append("Did not match acoustic taste")
+        reasons.append("and did not match acoustic taste")
 
     
 
