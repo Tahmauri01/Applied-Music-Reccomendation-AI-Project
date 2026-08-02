@@ -52,6 +52,9 @@ You can add more tests in `tests/test_recommender.py`.
 
 ## Sample Recommendation Output
 
+(prompt = f"{song['title']} scored {score:.2f} because: {reasons}. Give positive factors first, then negative factors, then give a summary. In your summary include your interpretation of {genre_text} and {mood_text}. Do not use emojis or ask user questions. Add a new line at the end of the summary.")
+
+
 ==================================================
 Top 5 Recommendations
 ==================================================
