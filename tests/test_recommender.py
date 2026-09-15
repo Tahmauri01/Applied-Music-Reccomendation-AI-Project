@@ -46,7 +46,7 @@ def test_recommend_returns_songs_sorted_by_score():
     assert results[0].mood == "happy"
 
 
-def test_explain_recommendation_returns_non_empty_string():
+def test_score_song_returns_score_and_reasons():
     user = UserProfile(
         favorite_genre="pop",
         favorite_mood="happy",
@@ -56,6 +56,7 @@ def test_explain_recommendation_returns_non_empty_string():
     rec = make_small_recommender()
     song = rec.songs[0]
 
-    explanation = rec.explain_recommendation(user, song)
-    assert isinstance(explanation, str)
-    assert explanation.strip() != ""
+    score, reasons = rec.score_song(user, song)
+    assert isinstance(score, float)
+    assert isinstance(reasons, list)
+    assert len(reasons) > 0
